@@ -1,9 +1,9 @@
 const asyncHandler = require("express-async-handler");
 const { Mongoose } = require("mongoose");
-const User = require("../models/userModel");
-const generateToken = require("../jwtokens/genrateToken");
+const User = require("../Models/UserModel");
+const GenerateToken = require("../JwtTokens/GenerateToken");
 
-const registerUser = asyncHandler(async (req, res) => {
+const RegisterUser = asyncHandler(async (req, res) => {
   const { name, email, password } = req.body;
 
   const userCheck = await User.findOne({ email });
@@ -23,7 +23,7 @@ const registerUser = asyncHandler(async (req, res) => {
       email: user.email,
       password: user.password,
       isAdmin: user.isAdmin,
-      token: generateToken(user._id),
+      token: GenerateToken(user._id),
     });
   } else {
     res.status(400);
@@ -31,7 +31,7 @@ const registerUser = asyncHandler(async (req, res) => {
   }
 });
 
-const authUser = asyncHandler(async (req, res) => {
+const AuthUser = asyncHandler(async (req, res) => {
   const { email, password } = req.body;
   const user = await User.findOne({ email });
 
@@ -42,7 +42,7 @@ const authUser = asyncHandler(async (req, res) => {
       email: user.email,
       password: user.password,
       isAdmin: user.isAdmin,
-      token: generateToken(user._id),
+      token: GenerateToken(user._id),
     });
   } else {
     res.status(400);
@@ -50,4 +50,4 @@ const authUser = asyncHandler(async (req, res) => {
   }
 });
 
-module.exports = { registerUser, authUser };
+module.exports = { RegisterUser, AuthUser };

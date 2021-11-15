@@ -1,9 +1,9 @@
 import React, { useState } from "react";
-import "./register.css";
+import "./Register.css";
 import axios from "axios";
 import { Link } from "react-router-dom";
-import ErrorMessage from "../ErrorMes";
-import Loading from "../loading";
+import ErrorMessage from "../Errors/ErrorMes";
+import Loading from "../Errors/Loading";
 
 const Register = () => {
   const [name, setName] = useState("");

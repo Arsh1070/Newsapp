@@ -1,10 +1,10 @@
 import React from "react";
 import { NavLink } from "react-router-dom";
 import { useState } from "react";
-import "./navbar.css";
-import logo from "./logo.png";
+import "./Navbar.css";
+import logo from "../Images/Logo.png";
 
-function Navbar() {
+function Navbar({ setCat }) {
   const [click, setClick] = useState(false);
   const handleClick = () => setClick(!click);
 
@@ -19,28 +19,54 @@ function Navbar() {
           <img src={logo} alt="logo" width="50px" height="50px"></img>
         </div>
         <ul className={click ? "list-items-active" : "list-items"}>
-          <NavLink exact to="/top" className="lists" activeClassName="active">
-            <li>Top news</li>
-          </NavLink>
-          <NavLink to="/general" className="lists">
+          <NavLink
+            to="/general"
+            className="lists"
+            activeClassName="active"
+            onClick={() => setCat("general")}
+          >
             <li>General</li>
           </NavLink>
-          <NavLink to="/entertainment" className="lists">
-            <li>Entertainment</li>
-          </NavLink>
-          <NavLink to="/sports" className="lists">
-            <li>Sports</li>
-          </NavLink>
-          <NavLink to="/business" className="lists">
+          <NavLink
+            to="/general"
+            className="lists"
+            onClick={() => setCat("business")}
+          >
             <li>Business</li>
           </NavLink>
-          <NavLink to="/technology" className="lists">
+          <NavLink
+            to="/general"
+            className="lists"
+            onClick={() => setCat("entertainment")}
+          >
+            <li>Entertainment</li>
+          </NavLink>
+          <NavLink
+            to="/general"
+            className="lists"
+            onClick={() => setCat("sports")}
+          >
+            <li>Sports</li>
+          </NavLink>
+          <NavLink
+            to="/general"
+            className="lists"
+            onClick={() => setCat("technology")}
+          >
             <li>Technology</li>
           </NavLink>
-          <NavLink to="/science" className="lists">
+          <NavLink
+            to="/general"
+            className="lists"
+            onClick={() => setCat("science")}
+          >
             <li>Science</li>
           </NavLink>
-          <NavLink to="/health" className="lists">
+          <NavLink
+            to="/general"
+            className="lists"
+            onClick={() => setCat("health")}
+          >
             <li>Health</li>
           </NavLink>
           <NavLink to="/" className="lists" onClick={logout}>

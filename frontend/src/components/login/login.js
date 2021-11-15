@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import axios from "axios";
-import Loading from "../loading";
-import ErrorMessage from "../ErrorMes";
-import "./login.css";
+import Loading from "../Errors/Loading";
+import ErrorMessage from "../Errors/ErrorMes";
+import "./Login.css";
 
 const Login = ({ history }) => {
   const [email, setEmail] = useState("");

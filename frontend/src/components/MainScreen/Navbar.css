@@ -74,28 +74,16 @@
     transition: all 0.5 ease-in-out;
   }
 }
-.headings,
-.headingsBus,
-.headingsEnt,
-.headingsSpo,
-.headingsGen,
-.headingsTec,
-.headingsSci,
-.headingsHea {
+
+.headingsGen {
   position: absolute;
   margin: 0px;
   padding: 0px 0px 0px 250px;
   top: 40px;
   max-width: 100%;
 }
-.content,
-.contentBus,
-.contentEnt,
-.contentSpo,
-.contentGen,
-.contentTec,
-.contentSci,
-.contentHea {
+
+.contentGen {
   position: relative;
   display: flex;
   justify-content: space-between;
@@ -104,28 +92,16 @@
   border-bottom: 2px solid #f0f0f0;
   font-size: 20px;
 }
-.imgS,
-.imgSBus,
-.imgSEnt,
-.imgSSpo,
-.imgSGen,
-.imgSTec,
-.imgSSci,
-.imgSHea {
+
+.imgSGen {
   margin: 30px;
   width: 200px;
   height: 200px;
   border-radius: 10px;
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
-.reading,
-.readingBus,
-.readingEnt,
-.readingSpo,
-.readingGen,
-.readingTec,
-.readingSci,
-.readingHea {
+
+.readingGen {
   position: absolute;
   text-decoration: none;
   left: 250px;

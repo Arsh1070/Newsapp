@@ -1,17 +1,13 @@
 const express = require("express");
 const dotenv = require("dotenv");
-const connectDB = require("./database/db");
-const userRoute = require("./routes/userRoute");
-const { errorHandler, notFound } = require("./middleware/errorMiddleware");
+const connectDB = require("./Database/DataBase");
+const userRoute = require("./Routes/UserRoutes");
+const { errorHandler, notFound } = require("./Middleware/ErrorMiddleware");
 
 const app = express();
 dotenv.config();
 connectDB();
 app.use(express.json());
-
-//app.get("/", (req, res) => {
-//res.send("APIS is running now");
-//});
 
 app.use("/api/users", userRoute);
 app.use(notFound);
