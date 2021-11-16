@@ -1,42 +1,59 @@
 .main {
   min-height: 100vh;
+  width: 100%;
   display: flex;
   justify-content: center;
   align-items: center;
 }
-.head_land {
-  font-size: 46px;
-  font-family: "Times New Roman", Times, serif;
-}
-.sub_line {
-  font-size: 20px;
-}
 .container_land {
-  height: 80vh;
+  height: 75vh;
   width: 70vh;
   background-color: white;
   border-radius: 10px;
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
 .cont_items {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-wrap: wrap;
+  display: grid;
+  grid-template-columns: auto;
+  grid-template-rows: 30vh 15vh 15vh;
 }
+.cont_items > div {
+  text-align: center;
+}
+
 .button_land {
   font-size: 20px;
   border: 2px solid;
   border-radius: 8px;
   background-color: #4caf50;
   color: white;
-  width: 300px;
+  width: 35vh;
   text-align: center;
   cursor: pointer;
   padding: 10px;
   margin-top: 50px;
 }
 .lanLogo {
-  margin-top: 30px;
+  margin-top: 40px;
   margin-bottom: 20px;
+}
+.sub_line {
+  font-family: Georgia, "Times New Roman", Times, serif;
+}
+.button_land:hover {
+  background-color: #008700;
+  transition: 0.3s ease-in-out;
+}
+
+@media screen and (max-width: 600px) {
+  .container_land {
+    width: 45vh;
+    height: 65vh;
+  }
+  .button_land {
+    margin-top: 30px;
+  }
+  .head_land {
+    font-size: 25px;
+  }
 }

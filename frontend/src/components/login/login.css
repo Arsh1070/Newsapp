@@ -1,6 +1,41 @@
-.log_container{
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    margin-top: 50px;
+.main_log {
+  width: 100%;
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.log_container {
+  height: 75vh;
+  width: 70vh;
+  background-color: white;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+.log_items {
+  display: grid;
+  grid-template-columns: auto;
+  grid-template-rows: 15vh 5vh 30vh 10vh 5vh 10vh;
+}
+.log_items > div {
+  text-align: center;
+}
+.head_log {
+  padding: 5vh 0;
+  color: black;
+  font-size: 35px;
+}
+.log_button {
+  font-size: 20px;
+  border: 2px solid;
+  border-radius: 8px;
+  background-color: #4caf50;
+  color: white;
+  width: 80%;
+  padding: 13px;
+  cursor: pointer;
+}
+.log_button:hover {
+  background-color: #008700;
+  transition: 0.3s ease-in-out;
 }

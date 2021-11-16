@@ -9,17 +9,20 @@ const LandingScreen = () => {
       <div className="main">
         <div className="container_land">
           <div className="cont_items">
-            <img
-              className="lanLogo"
-              src={logoLand}
-              alt="logo"
-              width="70px"
-              height="70px"
-            ></img>
-            <h1 className="head_land">
-              Welcome to News<span>App</span>
-            </h1>
-            <p className="sub_line">All news at one place</p>
+            <div>
+              <img
+                className="lanLogo"
+                src={logoLand}
+                alt="logo"
+                width="70px"
+                height="70px"
+              ></img>
+              <h1 className="head_land">
+                Welcome to News<span>App</span>
+              </h1>
+              <p className="sub_line">All news at one place</p>
+            </div>
+
             <div>
               <Link to="/register">
                 <button className="button_land">Signup</button>

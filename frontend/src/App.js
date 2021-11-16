@@ -18,7 +18,7 @@ function App() {
   const newsApi = async () => {
     try {
       const news = await axios.get(
-        `https://newsapi.org/v2/top-headlines?country=in&category=${category}&apiKey=4a9fa8a49bd44245a8f9aa3023e35bce`
+        `https://newsapi.org/v2/top-headlines?country=in&category=${category}&apiKey=5a9eb011fe414b3ab2171e0bcfa50a12`
       );
       setNewsArray(news.data.articles);
     } catch (error) {
@@ -28,7 +28,7 @@ function App() {
 
   useEffect(() => {
     newsApi();
-  });
+  }, [category]);
 
   return (
     <Router>
@@ -39,12 +39,12 @@ function App() {
         <div>
           <Navbar setCat={setCategory} />
 
-          <Route exact path="/general" component={General} />
-          {<General gen={newsArray} />}
+          <Route exact path="/general" component={General}>
+            {<General gen={newsArray} />}
+          </Route>
 
           <Footer />
         </div>
-
         <Route component={Page} />
       </Switch>
     </Router>

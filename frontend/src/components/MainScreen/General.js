@@ -7,7 +7,7 @@ const General = ({ gen }) => {
         return (
           <div className="contentGen">
             <img className="imgSGen" src={item.urlToImage} alt="pic"></img>
-            <p className="headingsGen" key={item.index}>
+            <p className="headingsGen" key={item.id}>
               {item.title}
             </p>
             <a className="readingGen" href={item.url}>

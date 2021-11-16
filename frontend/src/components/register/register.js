@@ -47,49 +47,63 @@ const Register = () => {
   };
 
   return (
-    <>
+    <div className="main_reg">
       <div className="reg_container">
-        <h2 className="headReg">Registration</h2>
-        {message && <ErrorMessage variant="danger">{message}</ErrorMessage>}
-        {error && <ErrorMessage variant="danger">{error}</ErrorMessage>}
-        {loading && <Loading />}
-        <input
-          type="text"
-          name="name"
-          value={name}
-          placeholder="Enter your name"
-          onChange={(e) => setName(e.target.value)}
-        />
-        <input
-          type="email"
-          name="email"
-          value={email}
-          placeholder="Enter your email"
-          onChange={(e) => setEmail(e.target.value)}
-        />
-        <input
-          type="password"
-          name="password"
-          value={password}
-          placeholder="Enter your password"
-          onChange={(e) => setPassword(e.target.value)}
-        />
-        <input
-          type="password"
-          name="repassWord"
-          value={repassWord}
-          placeholder="Re-enter your password"
-          onChange={(e) => setRepassWord(e.target.value)}
-        />
-        <div className="button" onClick={register}>
-          Register
+        <div className="reg_items">
+          <div>
+            <h2 className="headReg">Registration</h2>
+          </div>
+          <div>
+            {message && <ErrorMessage variant="danger">{message}</ErrorMessage>}
+            {error && <ErrorMessage variant="danger">{error}</ErrorMessage>}
+            {loading && <Loading />}
+          </div>
+          <div>
+            <input
+              type="text"
+              name="name"
+              value={name}
+              placeholder="Enter your name"
+              onChange={(e) => setName(e.target.value)}
+            />
+            <br />
+
+            <input
+              type="email"
+              name="email"
+              value={email}
+              placeholder="Enter your email"
+              onChange={(e) => setEmail(e.target.value)}
+            />
+            <br />
+            <input
+              type="password"
+              name="password"
+              value={password}
+              placeholder="Enter your password"
+              onChange={(e) => setPassword(e.target.value)}
+            />
+            <br />
+            <input
+              type="password"
+              name="repassWord"
+              value={repassWord}
+              placeholder="Re-enter your password"
+              onChange={(e) => setRepassWord(e.target.value)}
+            />
+          </div>
+          <div>
+            <button className="reg_button" onClick={register}>
+              Register
+            </button>
+          </div>
+          <div>or</div>
+          <div className="reg_login">
+            <Link to="/login">Existing User ? Login here</Link>
+          </div>
         </div>
-        <div>or</div>
-        <Link to="/login">
-          <button className="button">Login</button>
-        </Link>
       </div>
-    </>
+    </div>
   );
 };
 

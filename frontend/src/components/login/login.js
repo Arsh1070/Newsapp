@@ -14,7 +14,7 @@ const Login = ({ history }) => {
   useEffect(() => {
     const userInfo = JSON.parse(localStorage.getItem("UserInfo"));
     if (userInfo) {
-      history.push("/top");
+      history.push("/general");
     }
   }, [history]);
 
@@ -45,34 +45,44 @@ const Login = ({ history }) => {
   };
 
   return (
-    <>
+    <div className="main_log">
       <div className="log_container">
-        <h2 className="headReg">Login</h2>
-        {error && <ErrorMessage variant="danger">{error}</ErrorMessage>}
-        {loading && <Loading />}
-        <input
-          type="email"
-          name="email"
-          value={email}
-          placeholder="Enter your email"
-          onChange={(e) => setEmail(e.target.value)}
-        />
-        <input
-          type="password"
-          name="password"
-          value={password}
-          placeholder="Enter your password"
-          onChange={(e) => setPassword(e.target.value)}
-        />
-        <div className="button" onClick={submitHandler}>
-          Login
+        <div className="log_items">
+          <div>
+            <h2 className="head_log">Login</h2>
+          </div>
+          <div>
+            {error && <ErrorMessage variant="danger">{error}</ErrorMessage>}
+            {loading && <Loading />}
+          </div>
+          <div>
+            <input
+              type="email"
+              name="email"
+              value={email}
+              placeholder="Enter your email"
+              onChange={(e) => setEmail(e.target.value)}
+            />
+            <input
+              type="password"
+              name="password"
+              value={password}
+              placeholder="Enter your password"
+              onChange={(e) => setPassword(e.target.value)}
+            />
+          </div>
+          <div>
+            <button className="log_button" onClick={submitHandler}>
+              Login
+            </button>
+          </div>
+          <div>or</div>
+          <div>
+            <Link to="/register">New User ? Signup here</Link>
+          </div>
         </div>
-        <div>or</div>
-        <Link to="/register">
-          <button className="button">Signup</button>
-        </Link>
       </div>
-    </>
+    </div>
   );
 };
 
