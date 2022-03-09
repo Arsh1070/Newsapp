@@ -1,53 +1,61 @@
 const asyncHandler = require("express-async-handler");
-const { Mongoose } = require("mongoose");
 const User = require("../Models/UserModel");
-const GenerateToken = require("../JwtTokens/GenerateToken");
+const bcrypt = require("bcrypt");
+const jwt = require("jsonwebtoken");
 
-const RegisterUser = asyncHandler(async (req, res) => {
+const ROUNDS = 13;
+
+exports.serverPage = (req, res) => {
+  res.send("server listen at 8000");
+};
+
+exports.RegisterUser = asyncHandler(async (req, res) => {
   const { name, email, password } = req.body;
 
   const userCheck = await User.findOne({ email });
   if (userCheck) {
     res.status(400);
-    throw new Error("User Already Exists");
+    throw new Error("User already exists! check your email");
   }
-  const user = await User.create({
-    name,
-    email,
-    password,
-  });
-  if (user) {
-    res.status(201).json({
-      _id: user._id,
-      name: user.name,
-      email: user.email,
-      password: user.password,
-      isAdmin: user.isAdmin,
-      token: GenerateToken(user._id),
+
+  try {
+    bcrypt.hash(password, ROUNDS, (err, hash) => {
+      const user = new User({ name, email, passwordHash: hash });
+      user.save().then(() => {
+        res.status(201).json({ message: "Registration Successful !" });
+      });
     });
-  } else {
+  } catch {
     res.status(400);
     throw new Error("Error Occurred!");
   }
 });
 
-const AuthUser = asyncHandler(async (req, res) => {
+exports.Login = asyncHandler(async (req, res) => {
   const { email, password } = req.body;
-  const user = await User.findOne({ email });
 
-  if (user && (await user.matchPassword(password))) {
-    res.json({
-      _id: user._id,
-      name: user.name,
-      email: user.email,
-      password: user.password,
-      isAdmin: user.isAdmin,
-      token: GenerateToken(user._id),
-    });
+  const existingUser = await User.findOne({ email });
+  if (existingUser) {
+    const recPassword = await bcrypt.compare(
+      password,
+      existingUser.passwordHash
+    );
+    if (recPassword) {
+      const tokenData = { id: existingUser._id };
+      console.log(tokenData);
+      res.json({
+        token: `${jwt.sign(tokenData, process.env.JWT_SECRET, {
+          expiresIn: "1d",
+        })}`,
+      });
+    } else {
+      res.status(400).json({ message: "Email or Password invalid !" });
+    }
   } else {
-    res.status(400);
-    throw new Error("Invalid Email or Password!");
+    await bcrypt.compare(
+      "dasdas",
+      "$2b$10$//DXiVVE59p7G5k/4Klx/ezF7BI42QZKmoOD0NDvUuqxRE5bFFBLy"
+    );
+    res.status(400).json({ message: "Email or Password invalid !" });
   }
 });
-
-module.exports = { RegisterUser, AuthUser };
