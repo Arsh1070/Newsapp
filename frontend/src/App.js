@@ -1,19 +1,24 @@
 import React from "react";
 import { useEffect, useState } from "react";
-import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+import { Routes, Route, useNavigate } from "react-router-dom";
 import General from "./Components/MainScreen/General";
 import Page from "./Components/Errors/NotFound";
-import Footer from "./Components/MainScreen/Footer";
 import "./App.css";
-import Navbar from "./Components/MainScreen/Navbar";
 import Register from "./Components/Register/Register";
 import Login from "./Components/Login/Login";
 import axios from "axios";
 import LandingScreen from "./Components/LandingPage/LandingScreen";
+import DashBoard from "./Components/MainScreen/DashBoard";
 
 function App() {
+  const Navigate = useNavigate();
   const [newsArray, setNewsArray] = useState([]);
   const [category, setCategory] = useState("general");
+  const [token, setToken] = useState("");
+
+  const recCatalog = (category) => {
+    setCategory(category);
+  };
 
   const newsApi = async () => {
     try {
@@ -27,27 +32,34 @@ function App() {
   };
 
   useEffect(() => {
+    const getToken = JSON.parse(localStorage.getItem("token"));
+    setToken(getToken);
+    if (token) {
+      Navigate("/dashboard/general");
+    } else {
+      Navigate("/login");
+    }
     newsApi();
-  }, [category]);
+  }, [category, token]);
 
   return (
-    <Router>
-      <Switch>
-        <Route exact path="/" component={LandingScreen} />
-        <Route exact path="/register" component={Register} />
-        <Route exact path="/login" component={Login} />
-        <div>
-          <Navbar setCat={setCategory} />
-
-          <Route exact path="/general" component={General}>
-            {<General gen={newsArray} />}
-          </Route>
-
-          <Footer />
-        </div>
-        <Route component={Page} />
-      </Switch>
-    </Router>
+    <>
+      <Routes>
+        <Route path="/" element={<LandingScreen />} />
+        <Route path="/register" element={<Register />} />
+        <Route path="/login" element={<Login />} />
+        <Route
+          path="/dashboard"
+          element={<DashBoard clickedCatalog={recCatalog} />}
+        >
+          <Route
+            path="/dashboard/general"
+            element={<General gen={newsArray} category={category} />}
+          />
+        </Route>
+        <Route path="/*" element={<Page />} />
+      </Routes>
+    </>
   );
 }
 

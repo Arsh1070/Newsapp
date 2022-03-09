@@ -1,15 +1,17 @@
 import React from "react";
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import { useState } from "react";
 import "./Navbar.css";
 import logo from "../Images/Logo.png";
 
 function Navbar({ setCat }) {
+  const Navigate = useNavigate();
   const [click, setClick] = useState(false);
   const handleClick = () => setClick(!click);
 
   const logout = () => {
-    localStorage.removeItem("UserInfo");
+    localStorage.removeItem("token");
+    Navigate("/");
   };
 
   return (
@@ -20,56 +22,67 @@ function Navbar({ setCat }) {
         </div>
         <ul className={click ? "list-items-active" : "list-items"}>
           <NavLink
-            to="/general"
-            className="lists"
-            activeClassName="active"
+            to="/dashboard/general"
+            className={(navData) => (navData.isActive ? "active" : "")}
+            style={{ padding: "20px", color: "fff", textDecoration: "none" }}
             onClick={() => setCat("general")}
           >
             <li>General</li>
           </NavLink>
           <NavLink
-            to="/general"
-            className="lists"
+            to="/dashboard/general"
+            className={(navData) => (navData.isActive ? "active" : "")}
+            style={{ padding: "20px", color: "fff", textDecoration: "none" }}
             onClick={() => setCat("business")}
           >
             <li>Business</li>
           </NavLink>
           <NavLink
-            to="/general"
-            className="lists"
+            to="/dashboard/general"
+            className={(navData) => (navData.isActive ? "active" : "")}
+            style={{ padding: "20px", color: "#fff", textDecoration: "none" }}
             onClick={() => setCat("entertainment")}
           >
             <li>Entertainment</li>
           </NavLink>
           <NavLink
-            to="/general"
-            className="lists"
+            to="/dashboard/general"
+            className={(navData) => (navData.isActive ? "active" : "")}
+            style={{ padding: "20px", color: "#fff", textDecoration: "none" }}
             onClick={() => setCat("sports")}
           >
             <li>Sports</li>
           </NavLink>
           <NavLink
-            to="/general"
-            className="lists"
+            to="/dashboard/general"
+            className={(navData) => (navData.isActive ? "active" : "")}
+            style={{ padding: "20px", color: "#fff", textDecoration: "none" }}
             onClick={() => setCat("technology")}
           >
             <li>Technology</li>
           </NavLink>
           <NavLink
-            to="/general"
-            className="lists"
+            to="/dashboard/general"
+            className={(navData) => (navData.isActive ? "active" : "")}
+            style={{ padding: "20px", color: "#fff", textDecoration: "none" }}
             onClick={() => setCat("science")}
           >
             <li>Science</li>
           </NavLink>
           <NavLink
-            to="/general"
-            className="lists"
+            to="/dashboard/general"
+            className={(navData) => (navData.isActive ? "active" : "")}
+            style={{ padding: "20px", color: "#fff", textDecoration: "none" }}
             onClick={() => setCat("health")}
           >
             <li>Health</li>
           </NavLink>
-          <NavLink to="/" className="lists" onClick={logout}>
+          <NavLink
+            to="/"
+            className={(navData) => (navData.isActive ? "active" : "")}
+            style={{ padding: "20px", color: "#fff", textDecoration: "none" }}
+            onClick={logout}
+          >
             <li>Logout</li>
           </NavLink>
         </ul>

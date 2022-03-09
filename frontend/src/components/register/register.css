@@ -26,6 +26,10 @@
   color: black;
   font-size: 35px;
 }
+.error {
+  padding-top: 40px;
+}
+
 input {
   margin-top: 5vh;
 }

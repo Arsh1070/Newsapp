@@ -1,13 +1,10 @@
 import React from "react";
-import { Alert } from "react-bootstrap";
 
-const ErrorMessage = ({ variant = "info", children }) => {
+const ErrorMessage = ({ children }) => {
   return (
-    <>
-      <Alert variant={variant} style={{ fontSize: 20 }}>
-        <strong>{children}</strong>
-      </Alert>
-    </>
+    <strong style={{ color: "red", fontSize: 15, padding: 40 }}>
+      {children}
+    </strong>
   );
 };
 

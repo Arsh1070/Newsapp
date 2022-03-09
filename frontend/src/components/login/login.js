@@ -1,22 +1,16 @@
-import React, { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
+import React, { useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 import Loading from "../Errors/Loading";
 import ErrorMessage from "../Errors/ErrorMes";
 import "./Login.css";
 
 const Login = ({ history }) => {
+  const Navigate = useNavigate();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [error, setError] = useState(false);
+  const [message, setMessage] = useState(false);
   const [loading, setLoading] = useState(false);
-
-  useEffect(() => {
-    const userInfo = JSON.parse(localStorage.getItem("UserInfo"));
-    if (userInfo) {
-      history.push("/general");
-    }
-  }, [history]);
 
   const submitHandler = async (e) => {
     e.preventDefault();
@@ -27,19 +21,22 @@ const Login = ({ history }) => {
         },
       };
       setLoading(true);
-
-      const { data } = await axios.post(
-        "/api/users/login",
-        {
-          email,
-          password,
-        },
-        config
-      );
+      const data = await axios
+        .post(
+          "http://localhost:8000/login",
+          {
+            email,
+            password,
+          },
+          config
+        )
+        .then((res) =>
+          localStorage.setItem("token", JSON.stringify(res.data.token))
+        );
+      Navigate("/dashboard/general");
       setLoading(false);
-      localStorage.setItem("UserInfo", JSON.stringify(data));
     } catch (error) {
-      setError(error.response.data.message);
+      setMessage(error.response.data.message);
       setLoading(false);
     }
   };
@@ -51,8 +48,8 @@ const Login = ({ history }) => {
           <div>
             <h2 className="head_log">Login</h2>
           </div>
-          <div>
-            {error && <ErrorMessage variant="danger">{error}</ErrorMessage>}
+          <div className="error">
+            {message && <ErrorMessage>{message}</ErrorMessage>}
             {loading && <Loading />}
           </div>
           <div>

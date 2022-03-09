@@ -22,17 +22,9 @@
   margin: auto;
   padding-right: 80px;
 }
-.lists {
-  padding: 20px;
-  color: #fff;
-  text-decoration: none;
-}
-.lists:hover {
-  color: aqua;
-  transition: 0.5s ease-in-out;
-}
+
 .active {
-  color: aqua;
+  color: aqua !important;
 }
 .nav-icon {
   color: #fff;
